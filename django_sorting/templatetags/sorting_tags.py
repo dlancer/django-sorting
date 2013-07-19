@@ -18,6 +18,7 @@ sort_directions = {
     '': {'icon': DEFAULT_SORT_DOWN, 'inverse': 'asc'},
 }
 
+allowed_sort_directions = ('asc', 'desc', '')
 
 def anchor(parser, token):
     """
@@ -80,6 +81,9 @@ class SortAnchorNode(template.Node):
             sortdir = getvars['dir']
             del getvars['dir']
         else:
+            sortdir = ''
+
+        if sortdir not in allowed_sort_directions:
             sortdir = ''
 
         if sortby == self.field:
